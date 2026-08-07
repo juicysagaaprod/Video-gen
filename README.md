@@ -91,6 +91,12 @@ docker compose up --build
 
 The app is served at `http://localhost:8080`. Configure `ARK_API_KEY`, `JWT_SECRET`, `ALLOWED_ORIGIN`, and (for reference-video uploads) `PUBLIC_BASE_URL` in `backend/.env` before deployment.
 
+## Netlify deployment
+
+The Netlify build deploys the Vite frontend and a same-origin `/api/*` Function. Production users, jobs, credit balances, uploads, and completed MP4s are persisted in Netlify Blobs; local development continues to use Express and SQLite.
+
+Set `ARK_API_KEY` and `JWT_SECRET` as secret Netlify environment variables before deploying. Netlify's binary Function request limit means direct uploads are capped at 4 MB in production; larger reference files should use public HTTP(S) or ModelArk `asset://` URLs. Generated MP4 responses are streamed from Netlify Blobs and should remain below Netlify's 20 MB streamed-response limit.
+
 ## Operational limits
 
 - BytePlus can cancel only tasks that are still `queued`; running tasks continue to completion and are billed normally.

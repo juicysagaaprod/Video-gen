@@ -6,3 +6,7 @@ backend.env
 .env
 *.log
 .DS_Store
+.netlify/
+
+# Local Netlify folder
+.netlify
