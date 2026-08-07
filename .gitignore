@@ -6,7 +6,7 @@ backend.env
 .env
 *.log
 .DS_Store
-.netlify/
+deno.lock
 
 # Local Netlify folder
-.netlify
+.netlify/
