@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN:-http://localhost:8080}
+    volumes:
+      - backend-data:/app/data
+    expose:
+      - "8787"
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  backend-data:
